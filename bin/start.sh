@@ -15,10 +15,22 @@
 #    along with cloud9 .  If not, see <http://www.gnu.org/licenses/>.
 
 NETWORK=$(docker \
+    container \
     inspect \
     --format "{{range .NetworkSettings.Networks}}{{.NetworkID}}{{end}}" \
     $(cat ~/sshd.cid)
 ) &&
+    SHELL_CIDFILE=$(mktemp) &&
+    rm ${SHELL_CIDFILE} &&
+    docker \
+        container \
+        run \
+        --detach \
+        --network ${NETWORK} \
+        --cidfile ${SHELL_CIDFILE} \
+        endlessplanet/shell &&
+    SHELL_CID=$(cat ${SHELL_CIDFILE}) &&
+    rm -f ${SHELL_CIDFILE} &&
     docker \
         container \
         run \
@@ -27,6 +39,7 @@ NETWORK=$(docker \
         --hostname ${PROJECT_NAME} \
         --name ${PROJECT_NAME} \
         --env PROJECT_NAME \
+        --env CONTAINER_ID=${SHELL_CID} \
         --env SSHD_CONTAINER="$(cat ~/sshd.cid)" \
         --volume /var/run/docker.sock:/var/run/docker.sock:ro \
         endlessplanet/cloud9
