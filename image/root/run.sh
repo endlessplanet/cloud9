@@ -21,7 +21,7 @@ apk update &&
     chmod 0700 /root/.ssh &&
     apk add --no-cache docker &&
     mkdir /workspace &&
-    cp /opt/docker/docker-shell.sh /usr/local/sbin/docker-shell &&
-    chmod 0500 /usr/local/sbin/docker-shell &&
-    echo /usr/local/sbin/docker-shell >> /etc/shells &&
+    cp /opt/docker/docker-shell.sh /usr/local/bin/docker-shell &&
+    chmod 0500 /usr/local/bin/docker-shell &&
+    echo /usr/local/bin/docker-shell >> /etc/shells &&
     rm -rf /var/cache/apk/*
