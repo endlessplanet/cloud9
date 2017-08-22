@@ -16,11 +16,19 @@
 
 apk update &&
     apk upgrade &&
+    echo http://dl-2.alpinelinux.org/alpine/edge/community/ >> /etc/apk/repositories &&
+    apk update &&
+    apk add --no-cache shadow &&
     apk add --no-cache openssh-client &&
     mkdir /root/.ssh &&
     chmod 0700 /root/.ssh &&
     apk add --no-cache docker &&
+    adduser -D user &&
+    usermod -a -G docker user &&
     mkdir /workspace &&
+    chown user:user /workspace &&
+    cp -r /root/.c9 /home/user/.c9 &&
+    chown -R user:user /home/user/.c9 &&
     cp /opt/docker/docker-shell.sh /usr/local/bin/docker-shell &&
     chmod 0500 /usr/local/bin/docker-shell &&
     echo /usr/local/bin/docker-shell >> /etc/shells &&

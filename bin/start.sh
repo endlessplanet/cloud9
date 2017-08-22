@@ -35,6 +35,11 @@ NETWORK=$(docker \
         endlessplanet/shell &&
     SHELL_CID=$(cat ${SHELL_CIDFILE}) &&
     rm -f ${SHELL_CIDFILE} &&
+    SHELL_VOLUME=$(docker \
+        inspect \
+        --format "{{ range .Mounts }}{{ if eq .Destination \"/workspace\" }}{{ .Name }}{{ end }}{{ end }}" \
+        ${SHELL_CID}
+    ) &&
     docker \
         container \
         run \

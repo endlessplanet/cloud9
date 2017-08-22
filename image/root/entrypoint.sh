@@ -30,5 +30,7 @@ ssh-keygen -f /root/.ssh/id_rsa -P "" &&
     chmod 0755 /root/.ssh/known_hosts &&
     (nohup ssh -fN -R 127.0.0.1:${SSHD_PORT}:127.0.0.1:8181 sshd </dev/null >/tmp/sshd1.log 2>&1 &) &&
     (nohup ssh -fN -L 0.0.0.0:80:0.0.0.0:${SSHD_PORT} sshd </dev/null >/tmp/sshd2.log 2>&1 &) &&
-    sed -i "s#^root:x:0:0:root:/root:/bin/ash\$#root:x:0:0:root:/root:/usr/local/bin/docker-shell#" /etc/passwd &&
-    forever /root/.c9/server.js -w /workspace/${PROJECT_NAME} --listen 127.0.0.1
+    chsh --shell /usr/local/bin/docker-shell &&
+    find / -name forever &&
+    stat /usr/local/bin/forever &&
+    su --preserve-environment user /opt/docker/listen.sh
