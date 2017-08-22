@@ -51,4 +51,5 @@ NETWORK=$(docker \
         --env CONTAINER_ID=${SHELL_CID} \
         --env SSHD_CONTAINER="$(cat ~/sshd.cid)" \
         --volume /var/run/docker.sock:/var/run/docker.sock:ro \
+        --volume ${SHELL_VOLUME}:/workspace \
         endlessplanet/cloud9
