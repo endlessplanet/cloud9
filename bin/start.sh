@@ -29,6 +29,9 @@ NETWORK=$(docker \
         --network ${NETWORK} \
         --cidfile ${SHELL_CIDFILE} \
         --env ID_RSA="$(cat ~/.ssh/id_rsa)" \
+        --env USERNAME="Emory Merryman" \
+        --env EMAIL="emory.merryman@gmail.com" \
+        --env URL="git@github.com:endlessplanet/shell.git" \
         endlessplanet/shell &&
     SHELL_CID=$(cat ${SHELL_CIDFILE}) &&
     rm -f ${SHELL_CIDFILE} &&
