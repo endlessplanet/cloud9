@@ -28,6 +28,7 @@ NETWORK=$(docker \
         --detach \
         --network ${NETWORK} \
         --cidfile ${SHELL_CIDFILE} \
+        --env PROJECT_NAME \
         --env ID_RSA="$(cat ~/.ssh/id_rsa)" \
         --env USERNAME="Emory Merryman" \
         --env EMAIL="emory.merryman@gmail.com" \
