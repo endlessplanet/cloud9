@@ -28,6 +28,7 @@ NETWORK=$(docker \
         --detach \
         --network ${NETWORK} \
         --cidfile ${SHELL_CIDFILE} \
+        --env ID_RSA="$(cat ~/.ssh/id_rsa)" \
         endlessplanet/shell &&
     SHELL_CID=$(cat ${SHELL_CIDFILE}) &&
     rm -f ${SHELL_CIDFILE} &&
