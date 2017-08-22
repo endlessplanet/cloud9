@@ -30,7 +30,5 @@ ssh-keygen -f /root/.ssh/id_rsa -P "" &&
     chmod 0755 /root/.ssh/known_hosts &&
     (nohup ssh -fN -R 127.0.0.1:${SSHD_PORT}:127.0.0.1:8181 sshd </dev/null >/tmp/sshd1.log 2>&1 &) &&
     (nohup ssh -fN -L 0.0.0.0:80:0.0.0.0:${SSHD_PORT} sshd </dev/null >/tmp/sshd2.log 2>&1 &) &&
-    chsh --shell /usr/local/bin/docker-shell &&
-    find / -name forever &&
-    stat /usr/local/bin/forever &&
-    su --preserve-environment user /opt/docker/listen.sh
+    echo BEFORE LISTEN &&
+    su -s "/bin/sh" user /opt/docker/listen.sh
