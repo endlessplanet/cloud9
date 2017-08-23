@@ -25,7 +25,6 @@ apk update &&
     cp /opt/docker/user.sudo /etc/sudoers.d/user &&
     chmod 0444 /etc/sudoers.d/user &&
     mkdir /workspace &&
-    chown user:user /workspace &&
     cp -r /root/.c9 /home/user/.c9 &&
     chown -R user:user /home/user/.c9 &&
     cp /opt/docker/docker-shell.sh /usr/local/bin/docker-shell &&
