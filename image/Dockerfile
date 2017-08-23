@@ -12,8 +12,8 @@
 #
 #    You should have received a copy of the GNU General Public License
 #    along with cloud9 .  If not, see <http://www.gnu.org/licenses/>.
-FROM sapk/cloud9:alpine
+FROM fedora:26
 COPY root /opt/docker/
-RUN ["sh", "/opt/docker/run.sh"]
+RUN ["sh", "/opt/docker/run.sh"]ex
 ENTRYPOINT ["sh", "/opt/docker/entrypoint.sh"]
 CMD []

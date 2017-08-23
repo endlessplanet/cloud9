@@ -14,19 +14,18 @@
 #    You should have received a copy of the GNU General Public License
 #    along with cloud9 .  If not, see <http://www.gnu.org/licenses/>.
 
-apk update &&
-    apk upgrade &&
-    apk add --no-cache openssh-client &&
-    mkdir /root/.ssh &&
-    chmod 0700 /root/.ssh &&
-    apk add --no-cache docker &&
-    adduser -D -s /usr/local/bin/docker-shell user &&
-    apk add --no-cache sudo &&
-    cp /opt/docker/user.sudo /etc/sudoers.d/user &&
-    chmod 0444 /etc/sudoers.d/user &&
-    mkdir /workspace &&
-    cp -r /root/.c9 /home/user/.c9 &&
-    chown -R user:user /home/user/.c9 &&
-    cp /opt/docker/docker-shell.sh /usr/local/bin/docker-shell &&
-    chmod 0555 /usr/local/bin/docker-shell &&
-    rm -rf /var/cache/apk/*
+dnf update --assumeyes &&
+    dnf install --assumeyes git make python tar which bzip2 ncurses gmp-devel mpfr-devel libmpc-devel glibc-devel flex bison glibc-static zlib-devel gcc gcc-c++ nodejs &&
+    mkdir /opt/docker/c9sdk &&
+    git -C /opt/docker/c9sdk init &&
+    git -C /opt/docker/c9sdk remote add origin git://github.com/c9/core.git &&
+    git -C /opt/docker/c9sdk pull origin master &&
+    /opt/docker/c9sdk/scripts/install-sdk.sh &&
+    curl -L https://raw.githubusercontent.com/c9/install/master/install.sh | bash &&
+    cp /opt/docker/docker.repo /etc/yum.repos.d/ &&
+    dnf update --assumeyes &&
+    dnf install --assumeyes docker-engine &&
+    dnf install --assumeyes util-linux-user &&
+    dnf update --assumeyes &&
+    dnf clean all &&
+    true

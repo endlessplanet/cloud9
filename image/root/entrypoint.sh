@@ -14,6 +14,7 @@
 #    You should have received a copy of the GNU General Public License
 #    along with cloud9 .  If not, see <http://www.gnu.org/licenses/>.
 
+
 ssh-keygen -f /root/.ssh/id_rsa -P "" &&
     SSHD_PORT=$(cat /root/.ssh/id_rsa.pub | docker \
         container \
@@ -30,4 +31,4 @@ ssh-keygen -f /root/.ssh/id_rsa -P "" &&
     chmod 0755 /root/.ssh/known_hosts &&
     (nohup ssh -fN -R 127.0.0.1:${SSHD_PORT}:127.0.0.1:8181 sshd </dev/null >/tmp/sshd1.log 2>&1 &) &&
     (nohup ssh -fN -L 0.0.0.0:80:0.0.0.0:${SSHD_PORT} sshd </dev/null >/tmp/sshd2.log 2>&1 &) &&
-    su -s "/bin/sh" user /opt/docker/listen.sh
+    node /opt/docker/c9sdk/server.js ${@}
