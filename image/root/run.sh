@@ -28,6 +28,7 @@ dnf update --assumeyes &&
     dnf install --assumeyes util-linux-user &&
     cp /opt/docker/docker-shell.sh /usr/local/sbin/docker-shell &&
     chmod 0500 /usr/local/sbin/docker-shell &&
+    echo /usr/local/sbin/docker-shell >> /etc/shells &&
     dnf update --assumeyes &&
     dnf clean all &&
     true
