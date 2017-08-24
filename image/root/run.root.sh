@@ -30,7 +30,7 @@ dnf update --assumeyes &&
     echo /usr/local/bin/docker-shell >> /etc/shells &&
     adduser -s /usr/local/bin/docker-shell user &&
     dnf install --assumeyes sudo &&
-    cp user.sudo /etc/sudoers.d/user &&
+    cp /opt/docker/user.sudo /etc/sudoers.d/user &&
     chmod 0444 /etc/sudoers.d/user &&
     dnf update --assumeyes &&
     dnf clean all &&
