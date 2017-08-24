@@ -21,14 +21,17 @@ dnf update --assumeyes &&
     git -C /opt/docker/c9sdk remote add origin git://github.com/c9/core.git &&
     git -C /opt/docker/c9sdk pull origin master &&
     /opt/docker/c9sdk/scripts/install-sdk.sh &&
-    curl -L https://raw.githubusercontent.com/c9/install/master/install.sh | bash &&
     cp /opt/docker/docker.repo /etc/yum.repos.d/ &&
     dnf update --assumeyes &&
     dnf install --assumeyes docker-engine &&
     dnf install --assumeyes util-linux-user &&
-    cp /opt/docker/docker-shell.sh /usr/local/sbin/docker-shell &&
-    chmod 0500 /usr/local/sbin/docker-shell &&
-    echo /usr/local/sbin/docker-shell >> /etc/shells &&
+    cp /opt/docker/docker-shell.sh /usr/local/bin/docker-shell &&
+    chmod 0555 /usr/local/bin/docker-shell &&
+    echo /usr/local/bin/docker-shell >> /etc/shells &&
+    adduser -s /usr/local/bin/docker-shell user &&
+    dnf install --assumeyes sudo &&
+    cp user.sudo /etc/sudoers.d/user &&
+    chmod 0444 /etc/sudoers.d/user &&
     dnf update --assumeyes &&
     dnf clean all &&
     true

@@ -14,4 +14,4 @@
 #    You should have received a copy of the GNU General Public License
 #    along with cloud9 .  If not, see <http://www.gnu.org/licenses/>.
 
-docker exec --interactive --tty ${CONTAINER_ID} sh /opt/docker/shell.sh
+sudo docker exec --interactive --tty ${CONTAINER_ID} sh /opt/docker/shell.sh

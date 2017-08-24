@@ -14,6 +14,8 @@
 #    along with cloud9 .  If not, see <http://www.gnu.org/licenses/>.
 FROM fedora:26
 COPY root /opt/docker/
-RUN ["sh", "/opt/docker/run.sh"]ex
+RUN ["sh", "/opt/docker/run.root.sh"]
+USER user
+RUN ["sh", "/opt/docker/run.user.sh"]
 ENTRYPOINT ["sh", "/opt/docker/entrypoint.sh"]
 CMD []
