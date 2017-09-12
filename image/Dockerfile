@@ -17,5 +17,6 @@ COPY root /opt/docker/
 RUN ["sh", "/opt/docker/run.root.sh"]
 USER user
 RUN ["sh", "/opt/docker/run.user.sh"]
+USER root
 ENTRYPOINT ["sh", "/opt/docker/entrypoint.sh"]
 CMD []
