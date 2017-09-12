@@ -15,4 +15,5 @@
 #    along with cloud9 .  If not, see <http://www.gnu.org/licenses/>.
 
 docker login --username ${DOCKERHUB_USERNAME} --password ${DOCKERHUB_PASSWORD} &&
-    docker image build --tag endlessplanet/cloud9:$(git rev-parse --verify HEAD) image
+    docker image build --tag endlessplanet/cloud9:$(git rev-parse --verify HEAD) image &&
+    docker image push endlessplanet/cloud9:$(git rev-parse --verify HEAD)
