@@ -30,6 +30,8 @@ dnf update --assumeyes &&
     cp /opt/docker/user.sudo /etc/sudoers.d/user &&
     chmod 0444 /etc/sudoers.d/user &&
     dnf install --assumeyes meld &&
+    cp /opt/docker/start-cloud9.sh /usr/local/bin/start-cloud9 &&
+    chmod 0555 /usr/local/bin/start-cloud9 &&
     dnf update --assumeyes &&
     dnf clean all &&
     true
