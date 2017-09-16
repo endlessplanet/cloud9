@@ -25,7 +25,7 @@ dnf update --assumeyes &&
     dnf update --assumeyes &&
     dnf install --assumeyes docker-engine &&
     dnf install --assumeyes util-linux-user &&
-    adduser -s /usr/local/bin/docker-shell user &&
+    adduser user &&
     dnf install --assumeyes sudo &&
     cp /opt/docker/user.sudo /etc/sudoers.d/user &&
     chmod 0444 /etc/sudoers.d/user &&
