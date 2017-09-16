@@ -15,5 +15,4 @@
 #    along with cloud9 .  If not, see <http://www.gnu.org/licenses/>.
 
 sudo -E sh /opt/docker/entrypoint.root.sh &&
-    # chsh -s /usr/local/bin/docker-shell &&
     node /opt/docker/c9sdk/server.js -w /workspace/$(ls -1 /workspace) "${@}"
