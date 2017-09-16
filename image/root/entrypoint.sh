@@ -14,25 +14,25 @@
 #    You should have received a copy of the GNU General Public License
 #    along with cloud9 .  If not, see <http://www.gnu.org/licenses/>.
 
-
-ssh-keygen -f /root/.ssh/id_rsa -P "" &&
-    docker \
+sudo ssh-keygen -f /root/.ssh/id_rsa -P "" &&
+    sudo docker \
         container \
         exec \
         --interactive \
         ${SSHD_CONTAINER} \
-        ssh-keyscan sshd > /root/.ssh/known_hosts &&
-    chmod 0755 /root/.ssh/known_hosts &&
-    SSHD_PORT=$(cat /root/.ssh/id_rsa.pub | docker \
+        ssh-keyscan sshd | sudo tee /root/.ssh/known_hosts &&
+    sudo chmod 0755 /root/.ssh/known_hosts &&
+    SSHD_PORT=$(sudo cat /root/.ssh/id_rsa.pub | sudo \
+        docker \
         container \
         exec \
         --interactive \
         ${SSHD_CONTAINER} \
         sh /opt/docker/reserve-ports.sh) &&
     sleep 1s &&
-    rm -f /root/.ssh/known_hosts &&
-    (nohup ssh -i /root/.ssh/id_rsa -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -fN -R 127.0.0.1:${SSHD_PORT}:127.0.0.1:8181 sshd </dev/null >/tmp/sshd1.log 2>&1 &) &&
-    rm -f /root/.ssh/known_hosts &&
-    (nohup ssh -i /root/.ssh/id_rsa -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -fN -L 0.0.0.0:80:0.0.0.0:${SSHD_PORT} sshd </dev/null >/tmp/sshd2.log 2>&1 &) &&
+    sudo rm -f /root/.ssh/known_hosts &&
+    (sudo nohup ssh -i /root/.ssh/id_rsa -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -fN -R 127.0.0.1:${SSHD_PORT}:127.0.0.1:8181 sshd </dev/null >/tmp/sshd1.log 2>&1 &) &&
+    sudo rm -f /root/.ssh/known_hosts &&
+    (sudo nohup ssh -i /root/.ssh/id_rsa -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -fN -L 0.0.0.0:80:0.0.0.0:${SSHD_PORT} sshd </dev/null >/tmp/sshd2.log 2>&1 &) &&
     PROJECT_NAME=$(ls -1 /workspace) &&
-    su --login user -c /usr/local/bin/start-cloud9 "${@}"
+    node /opt/docker/c9sdk/server.js -w /workspace/${PROJECT_NAME} "${@}"

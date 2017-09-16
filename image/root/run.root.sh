@@ -32,6 +32,8 @@ dnf update --assumeyes &&
     dnf install --assumeyes meld &&
     cp /opt/docker/start-cloud9.sh /usr/local/bin/start-cloud9 &&
     chmod 0555 /usr/local/bin/start-cloud9 &&
+    mkdir /workspace &&
+    chown user:user /workspace &&
     dnf update --assumeyes &&
     dnf clean all &&
     true
