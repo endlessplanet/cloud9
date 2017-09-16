@@ -18,5 +18,5 @@ RUN ["sh", "/opt/docker/run.root.sh"]
 USER user
 VOLUME /workspace
 RUN ["sh", "/opt/docker/run.user.sh"]
-ENTRYPOINT ["sh", "/opt/docker/entrypoint.sh"]
+ENTRYPOINT ["sh", "/opt/docker/entrypoint.user.sh"]
 CMD []
