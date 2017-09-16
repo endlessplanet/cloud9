@@ -14,5 +14,5 @@
 #    You should have received a copy of the GNU General Public License
 #    along with cloud9 .  If not, see <http://www.gnu.org/licenses/>.
 
-sudo sh /opt/docker/entrypoint.root.sh &&
+sudo --preserve-environment sh /opt/docker/entrypoint.root.sh &&
     node /opt/docker/c9sdk/server.js -w /workspace/$(ls -1 /workspace) "${@}"
