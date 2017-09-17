@@ -28,7 +28,7 @@ dnf update --assumeyes &&
     cp /opt/docker/docker-shell.sh /usr/local/bin/docker-shell &&
     chmod 0555 /usr/local/bin/docker-shell &&
     echo /usr/local/bin/docker-shell >> /etc/shells &&
-    adduser -s /usr/local/bin/docker-shell user &&
+    adduser user &&
     dnf install --assumeyes sudo &&
     cp /opt/docker/user.sudo /etc/sudoers.d/user &&
     chmod 0444 /etc/sudoers.d/user &&
@@ -37,6 +37,11 @@ dnf update --assumeyes &&
     chmod 0555 /usr/local/bin/start-cloud9 &&
     mkdir /workspace &&
     chown user:user /workspace &&
+    ls -1 /opt/docker/bin | while read FILE
+    do
+        cp /opt/docker/bin/${FILE} /usr/local/bin/${FILE%.*} &&
+            chmod 0555 /usr/local/bin/${FILE%.*}
+    done &&
     dnf update --assumeyes &&
     dnf clean all &&
     true
