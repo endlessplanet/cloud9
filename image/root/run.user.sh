@@ -14,7 +14,8 @@
 #    You should have received a copy of the GNU General Public License
 #    along with cloud9 .  If not, see <http://www.gnu.org/licenses/>.
 
-git clone https://github.com/magicmonty/bash-git-prompt.git .bash-git-prompt --depth=1 &&
+cd ${HOME} &&
+    git clone https://github.com/magicmonty/bash-git-prompt.git .bash-git-prompt --depth=1 &&
     (cat > /home/user/.bashrc <<EOF
 GIT_PROMPT_ONLY_IN_REPO=1
 source ~/.bash-git-prompt/gitprompt.sh
