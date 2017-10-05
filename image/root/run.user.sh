@@ -21,4 +21,6 @@ GIT_PROMPT_ONLY_IN_REPO=1
 source ~/.bash-git-prompt/gitprompt.sh
 EOF
     ) && 
-    curl -L https://raw.githubusercontent.com/c9/install/master/install.sh | bash
+    curl -L https://raw.githubusercontent.com/c9/install/master/install.sh | bash &&
+    mkdir ${HOME}/.ssh &&
+    chown user:user ${HOME}/.ssh
