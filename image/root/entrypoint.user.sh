@@ -15,4 +15,5 @@
 #    along with cloud9 .  If not, see <http://www.gnu.org/licenses/>.
 
 sudo -E sh /opt/docker/entrypoint.root.sh &&
-    node /opt/docker/c9sdk/server.js -w /workspace/$(ls -1 /workspace) "${@}"
+    mkdir /workspace/${ADVENTURE} &&
+    node /opt/docker/c9sdk/server.js -w /workspace/${ADVENTURE} "${@}"
